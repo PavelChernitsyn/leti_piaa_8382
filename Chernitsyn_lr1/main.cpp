@@ -184,17 +184,29 @@ void rec_fill(vector<vector<int>>& sqr, int curSpace, int curSize, int countSqr,
     if (countSqr + 1 == minNumOfSqr) 
     {
         /*Уже не лучший вариант расположения, так что назад */
+        /*cout << "Working...\n";
+        for (int i=0; i<N; i++)
+        {
+            for (int j=0; j<N; j++){
+                cout.width(3);
+                cout << sqr[i][j];
+            }
+            cout << endl;
+        }*/
         remove_last(sqr, arrOfSqr);
         return;
     }
     if (countSqr + 1 < minNumOfSqr && curSpace == 0) 
     {
-        cout << "Working...\n";
+        Square tmp = arrOfSqr.back();
+        cout << "Working..." << "Remove sqr: x = " << tmp.x << "; y = " <<
+                tmp.y << "; size = " << tmp.size << endl;
         for (int i=0; i<N; i++)
         {
-            cout.width(3);
-            for (int j=0; j<N; j++)
+            for (int j=0; j<N; j++){
+                cout.width(3);
                 cout << sqr[i][j];
+            }
             cout << endl;
         }
             
