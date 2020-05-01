@@ -189,6 +189,16 @@ void rec_fill(vector<vector<int>>& sqr, int curSpace, int curSize, int countSqr,
     }
     if (countSqr + 1 < minNumOfSqr && curSpace == 0) 
     {
+        cout << "Working...\n";
+        for (int i=0; i<N; i++)
+        {
+            cout.width(3);
+            for (int j=0; j<N; j++)
+                cout << sqr[i][j];
+            cout << endl;
+        }
+            
+
         minNumOfSqr = countSqr + 1;
         minArrOfSqr.assign(arrOfSqr.begin(), arrOfSqr.end());
         remove_last(sqr, arrOfSqr);
