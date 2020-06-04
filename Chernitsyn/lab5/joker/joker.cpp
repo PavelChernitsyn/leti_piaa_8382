@@ -235,15 +235,28 @@ vector<size_t> AhoCorasick(const string &text, const string &mask, char joker) {
             pattern.clear();
         }
     }
+    if (d_flag) cout << "Бор заполнен!" << endl;
 
     bor.makeAutomaton();
 
     for (size_t j = 0; j < text.size(); j++)
         for (auto pos : bor.find(text[j])) {
+            if (d_flag)
+            {
+                string str;
+                str = text.substr(pos.first, pos.second);
+                cout << "Найден фрагмент - " << str << endl;
+            }
             // На найденной терминальной вершине вычисляем индекс начала маски в тексте
             int i = int(j) - int(pos.first) - int(pos.second) + 1;
             if (i >= 0 && i + mask.size() <= text.size())
+            {
                 midArr[i]++; // Увеличиваем её значение на 1
+                if (d_flag)
+                {
+                    cout << "Количество безмасочных подстрок = " << numSubstrs << "; Найдено " << midArr[i] << endl;
+                }
+            }
         }
 
     for (size_t i = 0; i < midArr.size(); i++) {
@@ -252,6 +265,12 @@ vector<size_t> AhoCorasick(const string &text, const string &mask, char joker) {
         // в текст, при условии, что кол-во попаданий равно кол-ву подстрок б/м
         if (midArr[i] == numSubstrs) {
             result.push_back(i + 1);
+
+            if (d_flag)
+                {
+                    cout << "Количество обнаруженных безмасочных подстрок на " << i << " позиции равно " 
+                    << numSubstrs << ". Значит, шаблон найден!" << endl;
+                }
 
             // ИНДИВИДУАЛИЗАЦИЯ
             // для пропуска пересечений, после найденного индекса, увеличиваем его на длину маски
@@ -275,7 +294,7 @@ int main(int argc, char** argv)
     for (auto ans : AhoCorasick(D.getText(), D.getPattern(), D.getJoker()))
         cout << ans << endl;
 
-    //system("pause");
+    system("pause");
 
     return 0;
 }
