@@ -109,7 +109,12 @@ public:
     // Функция для поиска подстроки в строке при помощи автомата
     vector<size_t> find(const char c) {
         static const TreeNode *curr = this; // Вершина, с которой необходимо начать следующий вызов
-        if (d_flag) cout << "Ищем '" << c << "' из: " << (curr->dbgStr.empty() ? "Корень" : curr->dbgStr) << endl; // Дебаг
+        string str; //для вывода найденного шаблона
+        if (d_flag) 
+        {
+            cout << "Ищем '" << c << "' из: " << (curr->dbgStr.empty() ? "Корень" : curr->dbgStr) << endl; // Дебаг
+            str = curr->dbgStr;
+        }
 
         for (; curr != nullptr; curr = curr->suffixLink) {
             // Обходим потомков, если искомый символ среди потомков не найден, то
@@ -119,12 +124,15 @@ public:
                     curr = child.second; // Значение текущей вершины переносим на этого потомка
                     vector<size_t> found; // Вектор номеров найденных терм. вершин
 
+                    if (d_flag) cout << "Символ '" << c << "' найден!" << endl; // Дебаг
                     if (curr->numOfPattern) { // Для пропуска пересечений, после нахождения терминальной вершины
+                        if (d_flag)
+                        {
+                            cout << "Найден шаблон: " << str << c << endl;
+                        }
                         found.push_back(curr->numOfPattern - 1); // Добавляем к найденным эту вершину
                         curr = this; // И переходим в корень
                     }
-
-                    if (d_flag) cout << "Символ '" << c << "' найден!" << endl; // Дебаг
                     return found;
                 }
 
