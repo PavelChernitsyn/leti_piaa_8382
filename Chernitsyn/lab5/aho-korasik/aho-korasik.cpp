@@ -258,7 +258,7 @@ int main(int argc, char** argv)
     for (auto r : res)
         cout << r.first << ' ' << r.second << endl;
 
-    system("pause");
+    //system("pause");
 
     return 0;
 }

@@ -275,7 +275,7 @@ int main(int argc, char** argv)
     for (auto ans : AhoCorasick(D.getText(), D.getPattern(), D.getJoker()))
         cout << ans << endl;
 
-    system("pause");
+    //system("pause");
 
     return 0;
 }
